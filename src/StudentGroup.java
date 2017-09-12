@@ -90,7 +90,7 @@ public class StudentGroup implements StudentArrayOperation {
 				throw new IllegalArgumentException("Throw IllegalArgumentException...");
 			ArrayList<Object> ob1=new ArrayList<Object>(Arrays.asList(students));
 			ob1.add(0,student);
-			//students=ob1.toArray();
+			l+=1;
 		}
 		catch(IllegalArgumentException iae)
 		{
@@ -107,7 +107,7 @@ public class StudentGroup implements StudentArrayOperation {
 				throw new IllegalArgumentException("Throw IllegalArgumentException...");
 			ArrayList<Object> ob2=new ArrayList<Object>(Arrays.asList(students));
 			ob2.add(student);
-			//students=ob2.toArray();
+			l+=1;
 		}
 		catch(IllegalArgumentException iae)
 		{
@@ -126,7 +126,7 @@ public class StudentGroup implements StudentArrayOperation {
 				throw new IllegalArgumentException("Throw IllegalArgumentException...");
 			ArrayList<Object> ob3=new ArrayList<Object>(Arrays.asList(students));
 			ob3.add(index,student);
-			//students=ob3.toArray();
+			l+=1;
 		}
 		catch(IllegalArgumentException iae)
 		{
@@ -143,6 +143,7 @@ public class StudentGroup implements StudentArrayOperation {
 				throw new IllegalArgumentException("Throw IllegalArgumentException...");
 			ArrayList<Object> ob4=new ArrayList<Object>(Arrays.asList(students));
 			ob4.remove(index);
+			l-=1;
 		}
 		catch(IllegalArgumentException iae)
 		{
@@ -159,6 +160,7 @@ public class StudentGroup implements StudentArrayOperation {
 				throw new IllegalArgumentException("Throw IllegalArgumentException...");
 			ArrayList<Object> ob4=new ArrayList<Object>(Arrays.asList(students));
 			ob4.remove(ob4.indexOf(student));
+			l-=1;
 		}
 		catch(IllegalArgumentException iae)
 		{
@@ -176,7 +178,10 @@ public class StudentGroup implements StudentArrayOperation {
 				throw new IllegalArgumentException("Throw IllegalArgumentException...");
 			ArrayList<Object> ob5=new ArrayList<Object>(Arrays.asList(students));
 			for(i=index+1;i<ob5.size();i++)
+			{
 				ob5.remove(i);
+				l-=1;
+			}
 		}
 		catch(IllegalArgumentException iae)
 		{
@@ -194,7 +199,10 @@ public class StudentGroup implements StudentArrayOperation {
 				throw new IllegalArgumentException("Throw IllegalArgumentException...");
 			ArrayList<Object> ob5=new ArrayList<Object>(Arrays.asList(students));
 			for(i=(ob5.indexOf(student)+1);i<ob5.size();i++)
+			{
 				ob5.remove(i);
+				l-=1;
+			}
 		}
 		catch(IllegalArgumentException iae)
 		{
@@ -212,7 +220,10 @@ public class StudentGroup implements StudentArrayOperation {
 				throw new IllegalArgumentException("Throw IllegalArgumentException...");
 			ArrayList<Object> ob5=new ArrayList<Object>(Arrays.asList(students));
 			for(i=0;i<index;i++)
+			{
 				ob5.remove(i);
+				l-=1;
+			}
 		}
 		catch(IllegalArgumentException iae)
 		{
@@ -230,7 +241,10 @@ public class StudentGroup implements StudentArrayOperation {
 				throw new IllegalArgumentException("Throw IllegalArgumentException...");
 			ArrayList<Object> ob5=new ArrayList<Object>(Arrays.asList(students));
 			for(i=0;i<(ob5.indexOf(student));i++)
+			{
 				ob5.remove(i);
+				l-=1;
+			}
 		}
 		catch(IllegalArgumentException iae)
 		{
@@ -241,6 +255,20 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public void bubbleSort() {
 		// Add your implementation here
+		int i,j;
+		Student temp;
+		for(i=0;i<l;i++)
+		{
+			for(j=0;j<i;j++)
+			{
+				if(students[j].id>students[j+1].id)
+				{
+					temp=students[j];
+					students[j]=students[j+1];
+					students[j+1]=temp;
+				}
+			}
+		}
 	}
 
 	@Override
@@ -276,7 +304,20 @@ public class StudentGroup implements StudentArrayOperation {
 	@Override
 	public Student[] getStudentsWithMaxAvgMark() {
 		// Add your implementation here
-		return null;
+		Student[] stu=new Student();
+		int i,j=0;
+		double max=students[0].avgMark;
+		for(i=1;i<l;i++)
+		{
+			if(students[i].avgMark>max)
+				max=students[i].avgMark;
+		}
+		for(i=0;i<l;i++)
+		{
+			if(students[i].avgMark==max)
+				stu[j++]=students[i];
+		}
+		return stu;
 	}
 
 	@Override
